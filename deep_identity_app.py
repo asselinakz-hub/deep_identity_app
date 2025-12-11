@@ -1,6 +1,7 @@
 import os
 import json
 from datetime import datetime
+from typing import Optional
 from typing import List, Dict, Any
 
 import streamlit as st
@@ -32,7 +33,29 @@ MASTER_PASSWORD = "asselya_master"  # Можешь поменять
 # OPENAI CLIENT (через st.secrets или переменную окружения)
 # =========================
 
-def get_openai_client() -> Client | None:
+def get_openai_client() -> Optional[OpenAI]:
+    """
+    Аккуратно получаем OpenAI-клиент:
+    1) Пробуем st.secrets["OPENAI_API_KEY"]
+    2) Если нет — пробуем переменную окружения OPENAI_API_KEY
+    3) Если всё равно нет — возвращаем None (а не падаем)
+    """
+    api_key = None
+
+    # 1. из secrets
+    try:
+        api_key = st.secrets.get("OPENAI_API_KEY", None)
+    except Exception:
+        api_key = None
+
+    # 2. если не нашли — пробуем env
+    if not api_key:
+        api_key = os.environ.get("OPENAI_API_KEY")
+
+    if not api_key:
+        return None
+
+    return OpenAI(api_key=api_key)
     api_key = None
     try:
         api_key = st.secrets.get("OPENAI_API_KEY", None)
