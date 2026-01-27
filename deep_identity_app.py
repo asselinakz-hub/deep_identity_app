@@ -849,7 +849,7 @@ def build_block3_questions() -> List[Question]:
     q.append(Q("c1_q3", "c1", "3) Какие фильмы ты любишь больше всего смотреть",
                [
                    AnswerOption("Триллеры, детективы", {"AMETIST": 1}, tags=["thinking"]),
-                   AnswerOption("Романтические фильмы/драмы", {"IZUMRUD": 0.6, GRANAT: 0.6}, tags=["stage"]),
+                   AnswerOption("Романтические фильмы/драмы", {"IZUMRUD": 0.6, "GRANAT": 0.6}, tags=["stage"]),
                    AnswerOption("Преодоление/экшен/борьба/риск", {"RUBIN": 0.6, "CITRIN": 0.6}, tags=["adrenaline"]),
                    AnswerOption("Научно-документальные фильмы, как все устроено/исторические", {"YANTAR": 1, "SAPFIR": 0.8}, tags=["system"]),
                    AnswerOption("Про спорт, выносливость", {"SHUNGIT": 1}, tags=["beauty"]),
