@@ -831,7 +831,7 @@ def build_block3_questions() -> List[Question]:
                    AnswerOption("Глубокие мысли, нестандартное мышление", {"AMETIST": 1.0}, tags=["thinking"]),
                    AnswerOption("Красивый голос, подача, манера говорить", {"GELIODOR": 1.0}, tags=["network"]),
                    AnswerOption("Передавать и проявлть эмоции, умение зажечь/заводить друзей", {"GRANAT": 1.0}, tags=["stage"]),
-                   AnswerOption("Система, продуманность, порядок, все ровно, все работает "как надо"", {"YANTAR": 1.0}, tags=["system"]),
+                   AnswerOption("Система, продуманность, порядок, все ровно, все работает хорошо", {"YANTAR": 1.0}, tags=["system"]),
                    AnswerOption("Какой красивый и гармоничный", {"IZUMRUD": 1.0}, tags=["beauty"]),
                    AnswerOption("Смелость, риск, шаг в неизвестность", {"RUBIN": 1.0}, tags=["adrenaline"]),
                    AnswerOption("Умение делать деньги/результат", {"CITRIN": 1.0}, tags=["money"]),
