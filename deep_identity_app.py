@@ -85,14 +85,14 @@ def update_result(updated_item: Dict[str, Any]) -> None:
 # ============================
 
 POTENTIALS = [
-    "AMETIST",   # глубина/анализ/мышление
-    "SAPFIR",    # смысл/миссия/внутренний вектор
-    "GELIODOR",  # голос/нетворк/обучение/коммуникации
-    "GRANAT",    # сцена/эмоции/влияние/внимание
-    "CITRIN",    # деньги/сделки/результат/победа
-    "IZUMRUD",   # красота/эстетика/забота/гармония
-    "YANTAR",    # порядок/система/здоровье/детали
-    "RUBIN",     # адреналин/перезапуск/новизна/поездки
+    "AMETIST",   # глубина/анализ/мышление/миссия
+    "SAPFIR",    # смысл/миссия/внутренний вектор/музыкальные инструменты
+    "GELIODOR",  # голос/нетворк/обучение/коммуникации/готовка/вкус еды/популярность/быть в центре внимании
+    "GRANAT",    # сцена/эмоции/популярность/вечеринки/друзья/веселье/красота
+    "CITRIN",    # деньги/сделки/результат/победа/гибкое тело/скорость/чувство времени
+    "IZUMRUD",   # красота/эстетика/забота/гармония/психология/чувство
+    "YANTAR",    # порядок/система/здоровье/детали/структура/исправить/создать/починить
+    "RUBIN",     # адреналин/перезапуск/новизна/поездки/
     "SHUNGIT",   # тело/сила/выносливость/физ-опора
 ]
 
@@ -110,12 +110,12 @@ POT_LABEL = {
 
 # Короткие смыслы — для отчёта/таблицы
 POT_MEANING = {
-    "AMETIST": "Глубина мышления, анализ, стратегии, «дойти до сути».",
-    "SAPFIR": "Смысл, миссия, внутренний вектор, «зачем я живу/делаю».",
+    "AMETIST": "Глубина мышления, анализ, стратегии, «дойти до сути», миссия, смысл",
+    "SAPFIR": "Смысл, внутренний вектор, «зачем я живу/делаю», философия",
     "GELIODOR": "Коммуникации, обучение, нетворк, голос, объяснять и соединять людей.",
     "GRANAT": "Эмоции, влияние, сцена/видимость, харизма и внимание аудитории.",
     "CITRIN": "Деньги, сделки, результат, скорость победы, продукт/бизнес-эффект.",
-    "IZUMRUD": "Эстетика, красота, забота, атмосфера, гармония.",
+    "IZUMRUD": "Эстетика, красота, забота, атмосфера, гармония, психология.",
     "YANTAR": "Порядок, система, детали, здоровье, «чтобы всё работало».",
     "RUBIN": "Адреналин, перезапуск, новизна, новые места/опыт, события.",
     "SHUNGIT": "Тело, сила, выносливость, физическая опора, действие через тело.",
@@ -186,7 +186,7 @@ MOTIVE_OPTIONS = [
     ("SYSTEM_ORDER", "Порядок/контроль/логика (структура, детали, «чтобы работало»)"),
     ("MEANING_MISSION", "Смысл/миссия/внутренний вектор («зачем», польза миру)"),
     ("PEOPLE_CONNECTION", "Люди/связи/нетворк (соединять, общаться, обучать)"),
-    ("BEAUTY_HARMONY", "Красота/атмосфера/гармония (эстетика, уют, стиль)"),
+    ("BEAUTY_HARMONY", "Красота/атмосфера/гармония/психология/чувство (эстетика, уют, стиль)"),
     ("IMPACT_EMOTION", "Влияние/эмоция/отклик людей (харизма, внимание, реакция)"),
 ]
 
@@ -287,8 +287,8 @@ def build_block1_questions() -> Dict[str, Question]:
             AnswerOption("Животные: жалел(а), лечил(а), кормил(а)",
                          {"IZUMRUD": 2}, inject_questions=["b1_q5_animals_detail"], tags=["care"]),
             AnswerOption("Разбирать/собирать, Лего, схемы",
-                         {"YANTAR": 1, "AMETIST": 1}, inject_questions=["b1_q8_order_tech_detail"], tags=["system"]),
-            AnswerOption("Болтал(а), общался(ась), шутил(а), придумывал(а) истории",
+                         {"YANTAR": 1}, inject_questions=["b1_q8_order_tech_detail"], tags=["system"]),
+            AnswerOption("Болтал(а), общался(ась), шутил(а), придумывал(а) истории", пел песни,
                          {"GELIODOR": 2}, inject_questions=["b1_q6_talk_detail"], tags=["network"]),
         ],
     )
@@ -299,11 +299,11 @@ def build_block1_questions() -> Dict[str, Question]:
         text="Какие школьные предметы ты любил(а) больше всего?",
         allow_multiple=True,
         options=[
-            AnswerOption("Математика/физика/информатика/логика", {"AMETIST": 2, "YANTAR": 1}, tags=["thinking"]),
-            AnswerOption("Литература/история/философия/психология", {"SAPFIR": 2, "AMETIST": 1}, tags=["meaning"]),
+            AnswerOption("Математика/физика/информатика/логика", {"AMETIST": 2, "YANTAR": 2}, tags=["thinking"]),
+            AnswerOption("Литература/история/философия/психология", {"SAPFIR": 2, "AMETIST": 0.5}, tags=["meaning"]),
             AnswerOption("Музыка/пение/театр/выступления", {"GRANAT": 1, "GELIODOR": 1}, inject_questions=["b1_q9_music_detail"], tags=["stage"]),
             AnswerOption("Физкультура/соревнования", {"SHUNGIT": 1, "CITRIN": 0.5}, inject_questions=["b1_q7_sport_detail"], tags=["sport"]),
-            AnswerOption("Рисование/дизайн/красота", {"IZUMRUD": 2}, tags=["beauty"]),
+            AnswerOption("Рисование/дизайн/красота/психология", {"IZUMRUD": 2}, tags=["beauty"]),
             AnswerOption("Ничего особо — учился(ась) «как надо»", {"YANTAR": 0.5}, tags=["system"]),
         ],
     )
@@ -316,9 +316,10 @@ def build_block1_questions() -> Dict[str, Question]:
         options=[
             AnswerOption("Спорт", {"SHUNGIT": 1, "CITRIN": 0.4}, inject_questions=["b1_q7_sport_detail"], tags=["sport"]),
             AnswerOption("Музыка/вокал/театр/танцы как выступления", {"GRANAT": 1, "GELIODOR": 1}, inject_questions=["b1_q4_stage_detail"], tags=["stage"]),
-            AnswerOption("Техника/конструктор/моделирование/робототехника", {"YANTAR": 2, "AMETIST": 1}, tags=["system"]),
+            AnswerOption("Техника/конструктор/моделирование/робототехника", {"YANTAR": 2}, tags=["system"]),
             AnswerOption("Рисование/дизайн/hand-made", {"IZUMRUD": 2}, tags=["beauty"]),
-            AnswerOption("Лидерство/олимпиады/экономика", {"CITRIN": 1.5, "RUBIN": 0.5}, tags=["money"]),
+            AnswerOption("Лидерство/олимпиады/экономика", {"CITRIN": 1.5}, tags=["money"]),
+            AnswerOption("Танцы как управление телом, растяжка, гибкость", {"CITRIN": 1.5}, tags=["money"]),
             AnswerOption("Почти никуда / по обязанности", {"YANTAR": 0.5}, tags=["system"]),
         ],
     )
@@ -329,9 +330,9 @@ def build_block1_questions() -> Dict[str, Question]:
         text="Кто чаще выбирал, чем ты занимаешься в детстве (кружки, секции, занятия)?",
         allow_multiple=False,
         options=[
-            AnswerOption("Я сам(а) решал(а), что хочу делать", {"CITRIN": 0.6, "AMETIST": 0.4}),
+            AnswerOption("Я сам(а) решал(а), что хочу делать", {"CITRIN": 0.6, "AMETIST": 0.4, "RUBIN": 0.4}),
             AnswerOption("Чаще взрослые — я соглашался(ась)", {"YANTAR": 0.7}),
-            AnswerOption("Комбинация: инициатива + решение взрослых", {"RUBIN": 0.4, "YANTAR": 0.3}),
+            AnswerOption("Комбинация: инициатива + решение взрослых", {"CITRIN": 0.3, "YANTAR": 0.1}),
         ],
     )
 
@@ -379,7 +380,7 @@ def build_block1_questions() -> Dict[str, Question]:
         options=[
             AnswerOption("Любил(а) разложить по местам, хаос раздражал", {"YANTAR": 2}, inject_questions=["b1_q8_order_tech_detail"], tags=["system"]),
             AnswerOption("Нормально, но не зацикливался(ась)", {"YANTAR": 0.8}),
-            AnswerOption("Творческий беспорядок — главное интерес", {"GRANAT": 0.4, "IZUMRUD": 0.6}, tags=["beauty"]),
+            AnswerOption("Творческий беспорядок — главное интерес", {"GRANAT": 0.5, "GELIODOR": 0.5}, tags=["beauty"]),
         ],
     )
 
@@ -391,14 +392,14 @@ def build_block1_questions() -> Dict[str, Question]:
         options=[
             AnswerOption("Много читал(а) сам(а), любил(а) новое", {"AMETIST": 1.6, "SAPFIR": 0.6}, inject_questions=["b1_q2_reading_detail"], tags=["thinking"]),
             AnswerOption("Читал(а) если надо, сам(а) редко выбирал(а)", {"YANTAR": 0.5}),
-            AnswerOption("Чтение не привлекало", {}),
+            AnswerOption("Чтение не привлекало", {"GRANAT": 0.3, "GELIODOR": 0.5}),
         ],
     )
 
     q["b1_q10_money_play"] = Question(
         id="b1_q10_money_play",
         block=1,
-        text="Были ли игры/занятия, связанные с деньгами, продажами, обменом?",
+        text="Были ли игры/занятия, связанные с деньгами, продажами, обменом, игры в "магазин"?",
         allow_multiple=False,
         options=[
             AnswerOption("Да, торговаться/продавать/обменивать было кайф", {"CITRIN": 2}, inject_questions=["b1_q3_trading_detail"], tags=["money"]),
@@ -413,11 +414,11 @@ def build_block1_questions() -> Dict[str, Question]:
         text="Школьный праздник: где ты чаще?",
         allow_multiple=False,
         options=[
-            AnswerOption("На сцене, в центре внимания", {"GRANAT": 1.6}, tags=["stage"]),
-            AnswerOption("За кадром: сценарий/организация/тайминг", {"YANTAR": 1.0, "RUBIN": 0.7}, tags=["system"]),
-            AnswerOption("В зале: поддерживать/наблюдать", {"IZUMRUD": 0.8, "SAPFIR": 0.6}),
+            AnswerOption("На сцене, в центре внимания", {"GRANAT": 1, "GELIODOR": 1}, tags=["stage"]),
+            AnswerOption("За кадром: сценарий/организация/тайминг", {"YANTAR": 1.0, "RUBIN": 0.7, "CITRIN": 1}, tags=["system"]),
+            AnswerOption("В зале: поддерживать/наблюдать", {}),
         ],
-    )
+    
 
     q["b1_q12_empathy"] = Question(
         id="b1_q12_empathy",
@@ -438,9 +439,9 @@ def build_block1_questions() -> Dict[str, Question]:
         allow_multiple=True,
         options=[
             AnswerOption("Известность, сцена, признание", {"GRANAT": 1.6, "GELIODOR": 0.6}, tags=["stage"]),
-            AnswerOption("Свой бизнес/дело, быть хозяином", {"CITRIN": 1.6, "RUBIN": 0.4}, tags=["money"]),
-            AnswerOption("Помогать людям, учить/лечить, делать мир лучше", {"SAPFIR": 1.6, "IZUMRUD": 0.6}, tags=["meaning"]),
-            AnswerOption("Красота, путешествия, эстетика вокруг", {"IZUMRUD": 1.3, "RUBIN": 0.7}, tags=["beauty"]),
+            AnswerOption("Свой бизнес/дело, быть хозяином", {"CITRIN": 1.6}, tags=["money"]),
+            AnswerOption("Помогать людям, делать мир лучше", {"SAPFIR": 1.6, "IZUMRUD": 0.6}, tags=["meaning"]),
+            AnswerOption("Путешествия, покорять новые вершины/места, стать пилотом", {"RUBIN": 1.3}, tags=["beauty"]),
             AnswerOption("Стабильность, безопасность, дом/уют", {"YANTAR": 1.6}, tags=["system"]),
         ],
     )
@@ -463,9 +464,9 @@ def build_block1_questions() -> Dict[str, Question]:
         text="Как ты относился(ась) к конкуренции и соревнованиям?",
         allow_multiple=False,
         options=[
-            AnswerOption("Важно быть первым, сильно переживал(а) если кто-то лучше", {"CITRIN": 1.0, "GRANAT": 0.4, "SHUNGIT": 0.4}),
+            AnswerOption("Важно быть первым, сильно переживал(а) если кто-то лучше", {"CITRIN": 1.6}),
             AnswerOption("Интересно участвовать, но не критично быть первым", {"SHUNGIT": 0.5}),
-            AnswerOption("Не любил(а) соревнования, избегал(а)", {"SAPFIR": 0.6, "AMETIST": 0.4}),
+            AnswerOption("Не любил(а) соревнования, избегал(а)", {}),
         ],
     )
 
@@ -490,7 +491,7 @@ def build_block1_questions() -> Dict[str, Question]:
         options=[
             AnswerOption("Сила тела/усталость/преодоление", {"SHUNGIT": 1.4}, tags=["sport"]),
             AnswerOption("Победа/медали/быть первым", {"CITRIN": 1.2}, tags=["sport"]),
-            AnswerOption("Команда/энергия группы/общение", {"GELIODOR": 0.8, "SHUNGIT": 0.4}, tags=["network"]),
+            AnswerOption("Команда/энергия группы/общение", {"SHUNGIT": 0.4}, tags=["network"]),
         ],
     )
 
@@ -502,7 +503,7 @@ def build_block1_questions() -> Dict[str, Question]:
         options=[
             AnswerOption("Реакция людей, внимание, эмоции", {"GRANAT": 1.4, "GELIODOR": 0.4}),
             AnswerOption("Придумать номер/образ/сценарий/как выглядит", {"RUBIN": 0.8, "IZUMRUD": 0.6, "YANTAR": 0.2}),
-            AnswerOption("Передать глубокую историю/смысл", {"SAPFIR": 0.8, "GRANAT": 0.6}),
+            AnswerOption("Передать глубокую историю/смысл", {"SAPFIR": 0.8,"GELIODOR": 0.8}),
         ],
     )
 
@@ -514,7 +515,7 @@ def build_block1_questions() -> Dict[str, Question]:
         options=[
             AnswerOption("Шутить/развлекать/поднимать настроение", {"GELIODOR": 1.2, "GRANAT": 0.4}),
             AnswerOption("Разговоры по душам один на один", {"SAPFIR": 0.7, "IZUMRUD": 0.5}),
-            AnswerOption("Идеи/планы/как улучшить/как сделать", {"AMETIST": 0.6, "YANTAR": 0.4, "CITRIN": 0.4}),
+            AnswerOption("Идеи/планы/как улучшить/как сделать", {"AMETIST": 0.6, "CITRIN": 0.4}),
         ],
     )
 
@@ -538,7 +539,7 @@ def build_block1_questions() -> Dict[str, Question]:
         allow_multiple=False,
         options=[
             AnswerOption("Сделка: договориться, закрыть, продать выгоднее", {"CITRIN": 1.4, "GELIODOR": 0.4}),
-            AnswerOption("Оформление: витрина, упаковка, красиво", {"IZUMRUD": 1.2, "YANTAR": 0.3}),
+            AnswerOption("Оформление: витрина, упаковка, красиво", {"IZUMRUD": 1.2, "GRANAT": 0.9}),
             AnswerOption("Считать/планировать/учёт", {"YANTAR": 1.2, "AMETIST": 0.4}),
         ],
     )
@@ -550,7 +551,7 @@ def build_block1_questions() -> Dict[str, Question]:
         allow_multiple=False,
         options=[
             AnswerOption("Чисто/аккуратно/по полочкам", {"YANTAR": 1.4}),
-            AnswerOption("Разобрать/понять, как устроено внутри", {"AMETIST": 0.8, "YANTAR": 0.6}),
+            AnswerOption("Разобрать/понять, как устроено внутри", {"YANTAR": 0.6}),
             AnswerOption("Удобно и красиво одновременно", {"IZUMRUD": 0.7, "YANTAR": 0.5}),
         ],
     )
@@ -607,9 +608,9 @@ def build_block2_questions() -> List[Question]:
             AnswerOption("Продажи/сделки/переговоры/закрытие", {"CITRIN": 1.2, "GELIODOR": 0.4}, tags=["money"]),
             AnswerOption("Обучение/наставничество/объяснять людям", {"GELIODOR": 1.2, "SAPFIR": 0.3}, tags=["network"]),
             AnswerOption("Операционка/процессы/регламенты/таблицы", {"YANTAR": 1.2, "AMETIST": 0.3}, tags=["system"]),
-            AnswerOption("Аналитика/стратегия/архитектура решений", {"AMETIST": 1.2, "YANTAR": 0.4}, tags=["thinking"]),
+            AnswerOption("Аналитика/стратегия/архитектура решений", {"AMETIST": 1.2}, tags=["thinking"]),
             AnswerOption("Контент/публичность/выступления/видимость", {"GRANAT": 1.0, "GELIODOR": 0.5}, tags=["stage"]),
-            AnswerOption("Тело/спорт/полевые задачи/движение", {"SHUNGIT": 1.0, "RUBIN": 0.2}, tags=["sport"]),
+            AnswerOption("Тело/спорт/полевые задачи/движение", {"SHUNGIT": 1.0}, tags=["sport"]),
             AnswerOption("Красота/визуал/стиль/эстетика", {"IZUMRUD": 1.2}, tags=["beauty"]),
         ],
         multi=True
@@ -633,10 +634,10 @@ def build_block2_questions() -> List[Question]:
         "b2_q3_ideal_roles",
         "3) Если деньги убрать: какие 2–3 роли ты бы выбрал(а) по любви?",
         [
-            AnswerOption("Педагог/наставник/обучение", {"GELIODOR": 1.2, "SAPFIR": 0.4}, tags=["network"]),
+            AnswerOption("Педагог/наставник/обучение", {"GELIODOR": 1.2, "YANTAR": 0.5}, tags=["network"]),
             AnswerOption("Продакт/предприниматель/создатель продукта", {"CITRIN": 1.2, "RUBIN": 0.4}, tags=["money"]),
-            AnswerOption("Операционный лидер/системщик", {"YANTAR": 1.2}, tags=["system"]),
-            AnswerOption("Аналитик/стратег/архитектор решений", {"AMETIST": 1.2, "YANTAR": 0.4}, tags=["thinking"]),
+            AnswerOption("Операционный эксперт/системщик", {"YANTAR": 1.2}, tags=["system"]),
+            AnswerOption("Аналитик/стратег/архитектор решений", {"AMETIST": 1.2}, tags=["thinking"]),
             AnswerOption("Сцена/ведущий/публичность", {"GRANAT": 1.2, "GELIODOR": 0.6}, tags=["stage"]),
             AnswerOption("Движ/поездки/события/экспедиции", {"RUBIN": 1.2}, tags=["adrenaline"]),
             AnswerOption("Эстетика/дизайн/визуал/стиль", {"IZUMRUD": 1.2}, tags=["beauty"]),
@@ -652,7 +653,7 @@ def build_block2_questions() -> List[Question]:
         [
             AnswerOption("Разобраться до сути, анализ, логика", {"AMETIST": 1.2}, tags=["thinking"]),
             AnswerOption("Систематизировать: таблицы, порядок, процесс", {"YANTAR": 1.2}, tags=["system"]),
-            AnswerOption("Обучать/объяснять/вести людей", {"GELIODOR": 1.2}, tags=["network"]),
+            AnswerOption("Обучать/объяснять/вести людей/петь/работать голосом", {"GELIODOR": 1.2}, tags=["network"]),
             AnswerOption("Закрывать сделки/дожимать результат", {"CITRIN": 1.2}, tags=["money"]),
             AnswerOption("Движ/скорость/поездки/новое", {"RUBIN": 1.2}, tags=["adrenaline"]),
             AnswerOption("Тело/спорт/тренировки", {"SHUNGIT": 1.2}, tags=["sport"]),
@@ -670,8 +671,8 @@ def build_block2_questions() -> List[Question]:
             AnswerOption("Переговоры/дожим/цены/торг", {"CITRIN": -0.6}),
             AnswerOption("Публичность/выступление/внимание", {"GRANAT": -0.6}),
             AnswerOption("Долгий анализ/копание", {"AMETIST": -0.4}),
-            AnswerOption("Эмоциональные разборки/конфликты", {"GRANAT": -0.4}),
-            AnswerOption("Физ. нагрузка/спорт", {"SHUNGIT": -0.4}),
+            AnswerOption("Знакомится с новыми людьми, ходить на шумные мероприятия", {"GRANAT": -0.4}),
+            AnswerOption("Физ. нагрузка/спорт, генеральная уборка", {"SHUNGIT": -0.4}),
             AnswerOption("Красота/творчество без критериев", {"IZUMRUD": -0.4}),
         ],
         multi=True
@@ -682,7 +683,7 @@ def build_block2_questions() -> List[Question]:
         "b2_q6_decision_style",
         "6) Как ты принимаешь важные решения чаще всего?",
         [
-            AnswerOption("Через анализ и факты", {"AMETIST": 1.0, "YANTAR": 0.4}),
+            AnswerOption("Через анализ и факты", {"AMETIST": 1.0}),
             AnswerOption("Через выгоду/цифры/результат", {"CITRIN": 1.0}),
             AnswerOption("Через людей/коммуникации/советы", {"GELIODOR": 0.8}),
             AnswerOption("Через внутренний смысл/«знак»", {"SAPFIR": 1.0}),
@@ -713,7 +714,7 @@ def build_block2_questions() -> List[Question]:
             AnswerOption("Я люблю соединять людей и быть мостом", {"GELIODOR": 1.2}, tags=["network"]),
             AnswerOption("Мне важно влияние и статус через окружение", {"GRANAT": 0.8, "CITRIN": 0.4}),
             AnswerOption("Я выбираю узкий круг, глубина важнее количества", {"SAPFIR": 0.6, "IZUMRUD": 0.2}),
-            AnswerOption("Я устаю от людей, люблю одиночество", {"AMETIST": 0.4}),
+            AnswerOption("Я устаю от людей, люблю одиночество", {"AMETIST": 0.1}),
         ],
         multi=True
     ))
@@ -737,9 +738,9 @@ def build_block2_questions() -> List[Question]:
         "10) Порядок/уборка/структура — это про что для тебя?",
         [
             AnswerOption("Меня успокаивает, в голове становится чисто", {"YANTAR": 1.2}),
-            AnswerOption("Я вижу, что сломано — и чиню", {"YANTAR": 1.0, "AMETIST": 0.4}),
+            AnswerOption("Я вижу, что сломано — и чиню", {"YANTAR": 1.0}),
             AnswerOption("Это про контроль, иначе тревожно", {"YANTAR": 0.8}),
-            AnswerOption("Это про эффективность и результат", {"CITRIN": 0.6, "YANTAR": 0.4}),
+            AnswerOption("Это про эффективность и результат", {"CITRIN": 0.6}),
         ],
         multi=True
     ))
@@ -752,7 +753,7 @@ def build_block2_questions() -> List[Question]:
             AnswerOption("Тонус, сила, тело, выносливость", {"SHUNGIT": 1.2}, tags=["sport"]),
             AnswerOption("Скорость, победа, счёт, быть первым", {"CITRIN": 1.2}, tags=["sport"]),
             AnswerOption("Адреналин, игра, драйв, эмоции", {"RUBIN": 1.2}, tags=["sport"]),
-            AnswerOption("Команда и общение", {"GELIODOR": 0.8}),
+            AnswerOption("Команда и общение", {"GELIODOR": 0.8, "SHUNGIT": 0.8}),
         ],
         multi=True
     ))
@@ -763,7 +764,7 @@ def build_block2_questions() -> List[Question]:
         "12) Про «быть первым»: это у тебя про…",
         [
             AnswerOption("Победа = доказать себе и другим", {"CITRIN": 1.0, "GRANAT": 0.4}),
-            AnswerOption("Это азарт/игра/включение", {"RUBIN": 0.8, "CITRIN": 0.4}),
+            AnswerOption("Это азарт/игра/включение", {"RUBIN": 0.8}),
             AnswerOption("Это дисциплина и система", {"YANTAR": 0.8}),
             AnswerOption("Мне не важно быть первым", {"SAPFIR": 0.2}),
         ],
@@ -778,7 +779,7 @@ def build_block2_questions() -> List[Question]:
             AnswerOption("Включаю режим результата и закрываю любой вопрос", {"CITRIN": 0.8}),
             AnswerOption("Держу порядок и стабильность", {"YANTAR": 0.8}),
             AnswerOption("Становлюсь мягким(ой), поддерживаю, берегу", {"IZUMRUD": 0.6}),
-            AnswerOption("Готов(а) на резкие перемены/перезапуск ради семьи", {"RUBIN": 0.6}),
+            AnswerOption("Готов(а) на резкие перемены/перезапуск ради семьи", {"RUBIN": 0.6, "CITRIN": 0.8}),
         ],
         multi=True
     ))
@@ -791,8 +792,8 @@ def build_block2_questions() -> List[Question]:
             AnswerOption("Движение/спорт/тело", {"SHUNGIT": 0.6}),
             AnswerOption("Новый опыт/поездка/смена обстановки", {"RUBIN": 0.8}),
             AnswerOption("Порядок/уборка/структура", {"YANTAR": 0.6}),
-            AnswerOption("Разговор/люди/поддержка", {"GELIODOR": 0.6}),
-            AnswerOption("Смысл/вера/миссия/разговор о «зачем»", {"SAPFIR": 0.8}),
+            AnswerOption("Разговор/люди/поддержка", {"GELIODOR": 0.6, "GRANAT": 0.6}),
+            AnswerOption("Смысл/вера/миссия/разговор о «зачем»", {"SAPFIR": 0.6, "AMETIST": 0.6}),
         ],
         multi=True
     ))
@@ -814,7 +815,7 @@ def build_block2_questions() -> List[Question]:
 
 
 # ============================
-# Блок 3 — столбцы: ВАУ/Процесс/Результат (15 вопросов)
+# Блок 3 — столбцы: Восприятие/Мотивация/Результат (15 вопросов)
 # ============================
 
 def build_block3_questions() -> List[Question]:
@@ -824,41 +825,41 @@ def build_block3_questions() -> List[Question]:
         return Question(id=_id, block=3, group=group, text=text, allow_multiple=multi, options=options)
 
     # c1: ВАУ / восприятие
-    q.append(Q("c1_q1", "c1", "1) Что в людях вызывает у тебя мгновенный «вау»? (можно несколько)",
+    q.append(Q("c1_q1", "c1", "1) Что в людях вызывает у тебя мгновенный «вау»? И у тебя возникают такие эмоции, как "Уау, абалдеть, ну как так возможно?"(можно несколько)",
                [
                    AnswerOption("Физическая сила, выносливость, владение телом", {"SHUNGIT": 1.0}, tags=["sport"]),
                    AnswerOption("Глубокие мысли, нестандартное мышление", {"AMETIST": 1.0}, tags=["thinking"]),
                    AnswerOption("Красивый голос, подача, манера говорить", {"GELIODOR": 1.0}, tags=["network"]),
-                   AnswerOption("Харизма, эмоции, умение зажечь", {"GRANAT": 1.0}, tags=["stage"]),
-                   AnswerOption("Система, продуманность, порядок", {"YANTAR": 1.0}, tags=["system"]),
-                   AnswerOption("Красота/стиль/эстетика", {"IZUMRUD": 1.0}, tags=["beauty"]),
+                   AnswerOption("Передавать и проявлть эмоции, умение зажечь/заводить друзей", {"GRANAT": 1.0}, tags=["stage"]),
+                   AnswerOption("Система, продуманность, порядок, все ровно, все работает "как надо"", {"YANTAR": 1.0}, tags=["system"]),
+                   AnswerOption("Какой красивый и гармоничный", {"IZUMRUD": 1.0}, tags=["beauty"]),
                    AnswerOption("Смелость, риск, шаг в неизвестность", {"RUBIN": 1.0}, tags=["adrenaline"]),
                    AnswerOption("Умение делать деньги/результат", {"CITRIN": 1.0}, tags=["money"]),
                ], multi=True))
 
-    q.append(Q("c1_q2", "c1", "2) Какие сцены/картинки тебя завораживают?",
+    q.append(Q("c1_q2", "c1", "2) Какие сцены/пространство тебя завораживают больше всего? И у тебя возникают такие эмоции, как "Уау, абалдеть, ну как так возможно?"",
                [
-                   AnswerOption("Природа, вода, горы, океан, закаты", {"IZUMRUD": 0.6, "SAPFIR": 0.4}, tags=["beauty"]),
-                   AnswerOption("Город, архитектура, линии, мосты, геометрия", {"YANTAR": 0.6, "CITRIN": 0.4}, tags=["system"]),
+                   AnswerOption("Природа, вода, горы, океан, закаты, сочетание цветов и света", {"IZUMRUD": 0.6}, tags=["beauty"]),
+                   AnswerOption("Город, архитектура, линии, мосты, геометрия", {"YANTAR": 0.6}, tags=["system"]),
                    AnswerOption("Лица людей, эмоции, реакции", {"GRANAT": 0.6, "GELIODOR": 0.4}, tags=["stage"]),
-                   AnswerOption("Спорт/движение/танец, тела в динамике", {"SHUNGIT": 0.6, "RUBIN": 0.4}, tags=["sport"]),
+                   AnswerOption("Спорт/движение/танец, тела в динамике", {"SHUNGIT": 0.6}, tags=["sport"]),
                    AnswerOption("Кадр/свет/тени/эстетика деталей", {"IZUMRUD": 1.0}, tags=["beauty"]),
                ], multi=True))
 
-    q.append(Q("c1_q3", "c1", "3) В фильмах/книгах тебя цепляет больше всего…",
+    q.append(Q("c1_q3", "c1", "3) Какие фильмы ты любишь больше всего смотреть",
                [
-                   AnswerOption("Смыслы/философия/неожиданные выводы", {"SAPFIR": 0.8, "AMETIST": 0.4}, tags=["meaning"]),
-                   AnswerOption("Стратегия/план/как всё продумано", {"AMETIST": 0.6, "YANTAR": 0.6}, tags=["thinking"]),
-                   AnswerOption("Преодоление/экшен/борьба/риск", {"RUBIN": 0.6, "SHUNGIT": 0.4}, tags=["adrenaline"]),
-                   AnswerOption("Эмоции/драмы/переживания", {"GRANAT": 0.6, "GELIODOR": 0.4}, tags=["stage"]),
-                   AnswerOption("Красота мира/картинка/костюмы", {"IZUMRUD": 0.8}, tags=["beauty"]),
+                   AnswerOption("Триллеры, детективы", {"AMETIST": 1}, tags=["thinking"]),
+                   AnswerOption("Романтические фильмы/драмы", {"IZUMRUD": 0.6, GRANAT: 0.6}, tags=["stage"]),
+                   AnswerOption("Преодоление/экшен/борьба/риск", {"RUBIN": 0.6, "CITRIN": 0.6}, tags=["adrenaline"]),
+                   AnswerOption("Научно-документальные фильмы, как все устроено/исторические", {"YANTAR": 1, "SAPFIR": 0.8}, tags=["system"]),
+                   AnswerOption("Про спорт, выносливость", {"SHUNGIT": 1}, tags=["beauty"]),
                ], multi=True))
 
-    q.append(Q("c1_q4", "c1", "4) Что в мире кажется тебе «магичным»/необъяснимым?",
+    q.append(Q("c1_q4", "c1", "4) Что в мире кажется тебе восхительным и удивительным?",
                [
                    AnswerOption("Как работает мозг/подсознание", {"AMETIST": 0.8, "SAPFIR": 0.2}, tags=["thinking"]),
-                   AnswerOption("Музыка/голос/звук и влияние", {"GELIODOR": 0.8}, tags=["network"]),
-                   AnswerOption("Системы и структуры меняют реальность", {"YANTAR": 0.8, "CITRIN": 0.2}, tags=["system"]),
+                   AnswerOption("Музыка/голос/влияние/популярность", {"GELIODOR": 0.8}, tags=["network"]),
+                   AnswerOption("Системы и структуры меняют реальность", {"YANTAR": 0.8}, tags=["system"]),
                    AnswerOption("Как одно смелое действие меняет жизнь", {"RUBIN": 0.8}, tags=["adrenaline"]),
                    AnswerOption("Природа/циклы/красота мира", {"IZUMRUD": 0.6, "SAPFIR": 0.2}, tags=["beauty"]),
                    AnswerOption("Смысл/судьба/внутренний путь", {"SAPFIR": 0.8}, tags=["meaning"]),
@@ -868,7 +869,7 @@ def build_block3_questions() -> List[Question]:
                [
                    AnswerOption("Громкие конфликты и сильные эмоции людей", {"GRANAT": 0.3}, tags=["stage"]),
                    AnswerOption("Хаос, отсутствие порядка и ясности", {"YANTAR": 0.6}, tags=["system"]),
-                   AnswerOption("Бессмысленность, когда нет логики/«зачем»", {"SAPFIR": 0.6, "AMETIST": 0.2}, tags=["meaning"]),
+                   AnswerOption("Бессмысленность, когда нет логики/«зачем»", {"SAPFIR": 0.6, "AMETIST": 0.8}, tags=["meaning"]),
                    AnswerOption("Большие деньги/ответственность", {"CITRIN": 0.4}, tags=["money"]),
                    AnswerOption("Риск/неизвестность", {"RUBIN": 0.3}, tags=["adrenaline"]),
                    AnswerOption("Сильная физическая нагрузка/боль/травма", {"SHUNGIT": 0.3}, tags=["sport"]),
@@ -878,22 +879,23 @@ def build_block3_questions() -> List[Question]:
     q.append(Q("c2_q1", "c2", "6) Какие занятия втягивают так, что ты забываешь про время?",
                [
                    AnswerOption("Разговоры/нетворк/обучение/объяснять", {"GELIODOR": 1.0}, tags=["network"]),
-                   AnswerOption("Анализ/разбор/смыслы", {"AMETIST": 0.8, "SAPFIR": 0.2}, tags=["thinking"]),
-                   AnswerOption("Порядок/структура/чинить/настраивать", {"YANTAR": 1.0}, tags=["system"]),
+                   AnswerOption("Анализ/разбор/смыслы/миссия/предназначение", {"AMETIST": 0.8, "SAPFIR": 0.2}, tags=["thinking"]),
+                   AnswerOption("Порядок/структура/чинить/настраивать/как работает тело", {"YANTAR": 1.0}, tags=["system"]),
                    AnswerOption("Закрывать результат/сделки/дожим", {"CITRIN": 1.0}, tags=["money"]),
                    AnswerOption("Тренировки/движение", {"SHUNGIT": 1.0}, tags=["sport"]),
-                   AnswerOption("Драйв/новые места/перезапуск", {"RUBIN": 1.0}, tags=["adrenaline"]),
-                   AnswerOption("Визуал/красота/атмосфера", {"IZUMRUD": 1.0}, tags=["beauty"]),
+                   AnswerOption("Драйв/новые места/экстрим", {"RUBIN": 1.0}, tags=["adrenaline"]),
+                   AnswerOption("Визуал/красота/атмосфера/психология людей", {"IZUMRUD": 1.0}, tags=["beauty"]),
                ], multi=True))
 
-    q.append(Q("c2_q2", "c2", "7) Что ты делаешь «для души», даже если никто не оценит?",
+    q.append(Q("c2_q2", "c2", "7) Что ты выбираешь делать «для души»?",
                [
                    AnswerOption("Убираться/организовывать пространство", {"YANTAR": 1.0}, tags=["system"]),
                    AnswerOption("Спорт/растяжка/уход за телом", {"SHUNGIT": 0.8}, tags=["sport"]),
-                   AnswerOption("Разговоры/обучение/помощь людям", {"GELIODOR": 0.8, "SAPFIR": 0.2}, tags=["network"]),
+                   AnswerOption("Разговоры/Караоке/Готовить или пробовать новые вкусы", {"GELIODOR": 0.8}, tags=["network"]),
                    AnswerOption("Писать/думать/разбираться в себе", {"AMETIST": 0.6, "SAPFIR": 0.4}, tags=["thinking"]),
                    AnswerOption("Красота/детали/эстетика дома", {"IZUMRUD": 0.8}, tags=["beauty"]),
                    AnswerOption("Движ/планы/поездки/новое", {"RUBIN": 0.8}, tags=["adrenaline"]),
+                   AnswerOption("Вечеринки, тусовки, новые знакомства, выступления, эмоции", {"GRANAT": 1}, tags=["stage"]),
                ], multi=True))
 
     q.append(Q("c2_q3", "c2", "8) Если есть выбор, ты добровольно выбираешь задачи типа…",
@@ -904,11 +906,12 @@ def build_block3_questions() -> List[Question]:
                    AnswerOption("Про анализ: понять закономерность", {"AMETIST": 1.0}, tags=["thinking"]),
                    AnswerOption("Про тело: поехать/привезти/сделать физически", {"SHUNGIT": 0.6, "RUBIN": 0.4}, tags=["sport"]),
                    AnswerOption("Про драйв: новое/перезапуск/движ", {"RUBIN": 1.0}, tags=["adrenaline"]),
+                   AnswerOption("Про людей: пойти на встречу, участвовать в тимблдинге", {"RUBIN": 1.0}, tags=["adrenaline"]),
                ], multi=True))
 
     q.append(Q("c2_q4", "c2", "9) Свободный день без обязательств — ты скорее…",
                [
-                   AnswerOption("Спорт/прогулка/горы/движение", {"SHUNGIT": 0.8, "RUBIN": 0.2}, tags=["sport"]),
+                   AnswerOption("Спорт/прогулка/горы/движение", {"SHUNGIT": 0.8}, tags=["sport"]),
                    AnswerOption("Навести порядок/закрыть мелочи/разобрать", {"YANTAR": 1.0}, tags=["system"]),
                    AnswerOption("Встретиться с людьми/общение/нетворк", {"GELIODOR": 1.0}, tags=["network"]),
                    AnswerOption("Посчитать планы/деньги/цели", {"CITRIN": 1.0}, tags=["money"]),
@@ -961,9 +964,9 @@ def build_block3_questions() -> List[Question]:
 
     q.append(Q("c3_q4", "c3", "14) Когда включается «боевой режим» и ты борешься до конца?",
                [
-                   AnswerOption("Защитить семью/команду", {"YANTAR": 0.4, "CITRIN": 0.4, "SAPFIR": 0.2}, tags=["meaning"]),
-                   AnswerOption("Жёсткий дедлайн — додавить результат", {"CITRIN": 0.8, "YANTAR": 0.2}, tags=["money"]),
-                   AnswerOption("Несправедливость — доказать правду", {"AMETIST": 0.6, "RUBIN": 0.4}, tags=["adrenaline"]),
+                   AnswerOption("Защитить семью/команду", {"YANTAR": 0.4, "CITRIN": 0.4}, tags=["meaning"]),
+                   AnswerOption("Жёсткий дедлайн — додавить результат", {"CITRIN": 0.8}, tags=["money"]),
+                   AnswerOption("Несправедливость — доказать правду", {"AMETIST": 0.6}, tags=["adrenaline"]),
                    AnswerOption("Переговоры/торг — отстоять условия", {"CITRIN": 0.8}, tags=["money"]),
                    AnswerOption("Перед выходом в эфир/публичность", {"GRANAT": 0.6, "GELIODOR": 0.4}, tags=["stage"]),
                    AnswerOption("В риск-ситуации/экстрим/кризис", {"RUBIN": 0.8, "SHUNGIT": 0.2}, tags=["adrenaline"]),
@@ -978,7 +981,7 @@ def build_block3_questions() -> List[Question]:
                    AnswerOption("Смысл/внутренний путь/осознанность", {"SAPFIR": 1.2}, tags=["meaning"]),
                    AnswerOption("Драйв/новая жизнь/перезапуски", {"RUBIN": 1.2}, tags=["adrenaline"]),
                    AnswerOption("Красота/гармония/эстетика мира", {"IZUMRUD": 1.2}, tags=["beauty"]),
-                   AnswerOption("Глубина/мышление/инсайты", {"AMETIST": 1.2}, tags=["thinking"]),
+                   AnswerOption("Глубина/мышление/подсознание/миссия/стратегия", {"AMETIST": 1.2}, tags=["thinking"]),
                ], multi=False))
 
     return q
