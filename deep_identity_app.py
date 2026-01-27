@@ -825,7 +825,7 @@ def build_block3_questions() -> List[Question]:
         return Question(id=_id, block=3, group=group, text=text, allow_multiple=multi, options=options)
 
     # c1: ВАУ / восприятие
-    q.append(Q("c1_q1", "c1", "1) Что в людях вызывает у тебя мгновенный «вау»? И у тебя возникают такие эмоции, как "Уау, абалдеть, ну как так возможно",
+    q.append(Q("c1_q1", "c1", "1) Что в людях вызывает у тебя мгновенный «вау»? И у тебя возникают такие эмоции, как "Уау, абалдеть, ну как так возможно"",
                [
                    AnswerOption("Физическая сила, выносливость, владение телом", {"SHUNGIT": 1.0}, tags=["sport"]),
                    AnswerOption("Глубокие мысли, нестандартное мышление", {"AMETIST": 1.0}, tags=["thinking"]),
