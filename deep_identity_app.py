@@ -418,7 +418,7 @@ def build_block1_questions() -> Dict[str, Question]:
             AnswerOption("За кадром: сценарий/организация/тайминг", {"YANTAR": 1.0, "RUBIN": 0.7, "CITRIN": 1}, tags=["system"]),
             AnswerOption("В зале: поддерживать/наблюдать", {}),
         ],
-    
+    )
 
     q["b1_q12_empathy"] = Question(
         id="b1_q12_empathy",
