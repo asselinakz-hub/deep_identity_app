@@ -288,7 +288,7 @@ def build_block1_questions() -> Dict[str, Question]:
                          {"IZUMRUD": 2}, inject_questions=["b1_q5_animals_detail"], tags=["care"]),
             AnswerOption("Разбирать/собирать, Лего, схемы",
                          {"YANTAR": 1}, inject_questions=["b1_q8_order_tech_detail"], tags=["system"]),
-            AnswerOption("Болтал(а), общался(ась), шутил(а), придумывал(а) истории", пел песни,
+            AnswerOption("Болтал(а), общался(ась), шутил(а), придумывал(а) истории, пел песни",
                          {"GELIODOR": 2}, inject_questions=["b1_q6_talk_detail"], tags=["network"]),
         ],
     )
