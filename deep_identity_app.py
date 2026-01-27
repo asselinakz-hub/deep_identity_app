@@ -399,7 +399,7 @@ def build_block1_questions() -> Dict[str, Question]:
     q["b1_q10_money_play"] = Question(
         id="b1_q10_money_play",
         block=1,
-        text="Были ли игры/занятия, связанные с деньгами, продажами, обменом, игры в "магазин"?",
+        text="Были ли игры/занятия, связанные с деньгами, продажами, обменом, игры в магазин?",
         allow_multiple=False,
         options=[
             AnswerOption("Да, торговаться/продавать/обменивать было кайф", {"CITRIN": 2}, inject_questions=["b1_q3_trading_detail"], tags=["money"]),
